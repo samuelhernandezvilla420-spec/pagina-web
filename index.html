@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f6fa">
+  <meta name="description" content="Marcadores en vivo, resultados y goleadores de las principales ligas de fútbol del mundo.">
+  <title>Fútbol al Día | Marcadores y ligas en vivo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/index.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio" aria-label="Fútbol al Día, inicio"><span class="brand-ball" aria-hidden="true">F</span><span>FÚTBOL<span class="brand-light">AL DÍA</span></span></a>
+    <nav class="main-nav" aria-label="Secciones principales">
+      <a class="nav-link active" href="#marcadores">Partidos</a>
+      <a class="nav-link" href="#competiciones">Competiciones</a>
+      <a class="nav-link" href="#posiciones">Posiciones</a>
+      <a class="nav-link" href="#jugadores">Jugadores</a>
+    </nav>
+    <div class="top-actions"><span class="live-indicator" id="live-indicator"><span></span><span class="live-copy">CARGANDO</span></span><button class="icon-button mobile-filter-button" id="mobile-filter-button" type="button" aria-label="Mostrar ligas">☷</button></div>
+  </header>
+
+  <section class="gallery-wrap" aria-label="Galería de fútbol">
+    <div class="gallery" id="gallery" role="region" aria-roledescription="carrusel" aria-label="Estadios y momentos del fútbol" tabindex="0">
+      <div class="gallery-slides" id="gallery-slides">
+        <figure class="gallery-slide active" role="group" aria-roledescription="diapositiva" aria-label="1 de 5">
+          <img src="img/oelo.jpg" alt="Vista del estadio Santiago Bernabéu y el campo del Real Madrid" fetchpriority="high">
+          <figcaption><span class="gallery-kicker">ESTADIOS · MADRID</span><h2>Una casa para las grandes noches.</h2><span class="gallery-caption">Santiago Bernabéu</span></figcaption>
+        </figure>
+        <figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="2 de 5" hidden>
+          <img src="img/images.jpg" alt="Estadio lleno e iluminado durante un partido nocturno" loading="lazy">
+          <figcaption><span class="gallery-kicker">EL JUEGO · EN DIRECTO</span><h2>La pasión se vive en cada cancha.</h2><span class="gallery-caption">Una noche de fútbol</span></figcaption>
+        </figure>
+        <figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="3 de 5" hidden>
+          <img src="img/6590868953_69522033c5_b.jpg" alt="Montaje de algunas de las figuras más reconocidas del fútbol" loading="lazy">
+          <figcaption><span class="gallery-kicker">LEYENDAS · GENERACIONES</span><h2>El talento que hizo historia.</h2><span class="gallery-caption">Figuras del fútbol mundial</span></figcaption>
+        </figure>
+        <figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="4 de 5" hidden>
+          <img src="img/562944.jpg" alt="Balón de fútbol en primer plano durante un partido europeo" loading="lazy">
+          <figcaption><span class="gallery-kicker">COMPETICIÓN · EUROPA</span><h2>Noventa minutos para recordarlo.</h2><span class="gallery-caption">La emoción de las noches europeas</span></figcaption>
+        </figure>
+        <figure class="gallery-slide" role="group" aria-roledescription="diapositiva" aria-label="5 de 5" hidden>
+          <img src="img/5260508.jpg" alt="Vista aérea del estadio Camp Nou en Barcelona" loading="lazy">
+          <figcaption><span class="gallery-kicker">ESTADIOS · BARCELONA</span><h2>Un estadio, miles de historias.</h2><span class="gallery-caption">Camp Nou</span></figcaption>
+        </figure>
+      </div>
+      <button class="gallery-arrow gallery-previous" id="gallery-previous" type="button" aria-label="Imagen anterior">‹</button>
+      <button class="gallery-arrow gallery-next" id="gallery-next" type="button" aria-label="Imagen siguiente">›</button>
+      <div class="gallery-controls">
+        <span class="gallery-counter" id="gallery-counter">01 <span>/ 05</span></span>
+        <div class="gallery-dots" role="group" aria-label="Elegir imagen">
+          <button class="gallery-dot active" type="button" aria-label="Mostrar imagen 1" aria-current="true"></button>
+          <button class="gallery-dot" type="button" aria-label="Mostrar imagen 2"></button>
+          <button class="gallery-dot" type="button" aria-label="Mostrar imagen 3"></button>
+          <button class="gallery-dot" type="button" aria-label="Mostrar imagen 4"></button>
+          <button class="gallery-dot" type="button" aria-label="Mostrar imagen 5"></button>
+        </div>
+        <span class="gallery-hint">FÚTBOL · EN TODAS PARTES</span>
+      </div>
+      <span class="visually-hidden" id="gallery-announcement" aria-live="polite"></span>
+    </div>
+  </section>
+
+  <main class="layout" id="inicio">
+    <aside class="sidebar" id="competiciones" aria-label="Ligas y competiciones">
+      <div class="sidebar-heading"><span>COMPETICIONES</span><span class="sidebar-count">11</span></div>
+      <button class="league-option selected" type="button" data-league="all"><span class="league-icon all-icon">⚽</span><span>Todas las ligas</span></button>
+      <div class="league-list" id="league-list">
+        <button class="league-option" type="button" data-league="eng.1"><span class="league-icon">🏴</span><span>Premier League</span></button>
+        <button class="league-option" type="button" data-league="esp.1"><span class="league-icon">🇪🇸</span><span>LaLiga</span></button>
+        <button class="league-option" type="button" data-league="ita.1"><span class="league-icon">🇮🇹</span><span>Serie A</span></button>
+        <button class="league-option" type="button" data-league="ger.1"><span class="league-icon">🇩🇪</span><span>Bundesliga</span></button>
+        <button class="league-option" type="button" data-league="fra.1"><span class="league-icon">🇫🇷</span><span>Ligue 1</span></button>
+        <button class="league-option" type="button" data-league="uefa.champions"><span class="league-icon">⭐</span><span>Champions League</span></button>
+        <button class="league-option" type="button" data-league="uefa.europa"><span class="league-icon">🏆</span><span>Europa League</span></button>
+        <button class="league-option" type="button" data-league="mex.1"><span class="league-icon">🇲🇽</span><span>Liga MX</span></button>
+        <button class="league-option" type="button" data-league="bra.1"><span class="league-icon">🇧🇷</span><span>Brasileirão</span></button>
+        <button class="league-option" type="button" data-league="arg.1"><span class="league-icon">🇦🇷</span><span>Primera Argentina</span></button>
+        <button class="league-option" type="button" data-league="usa.1"><span class="league-icon">🇺🇸</span><span>MLS</span></button>
+      </div>
+      <div class="sidebar-note"><span class="note-ball" aria-hidden="true">●</span><div><strong>El fútbol no para</strong><span>Marcadores de ligas alrededor del mundo.</span></div></div>
+    </aside>
+
+    <section class="scoreboard" id="marcadores" aria-labelledby="page-title">
+      <div class="page-heading"><div><p class="eyebrow">EL PLAN DE HOY</p><h1 id="page-title">Marcadores <span>de fútbol</span></h1></div><button class="refresh-button" id="refresh-button" type="button"><span aria-hidden="true">↻</span> Actualizar</button></div>
+      <div class="date-bar"><div class="date-controls"><button class="date-arrow" type="button" id="previous-day" aria-label="Día anterior">‹</button><button class="date-current" type="button" id="today-button">Hoy</button><button class="date-arrow" type="button" id="next-day" aria-label="Día siguiente">›</button><span class="date-label" id="date-label"></span></div><span class="update-label" id="last-update">Conectando marcadores…</span></div>
+      <div class="filter-tabs" role="group" aria-label="Filtrar partidos">
+        <button class="filter-tab active" type="button" data-filter="all">Todos</button>
+        <button class="filter-tab" type="button" data-filter="live"><span class="tab-live-dot"></span>En vivo</button>
+        <button class="filter-tab" type="button" data-filter="finished">Finalizados</button>
+        <button class="filter-tab" type="button" data-filter="upcoming">Próximos</button>
+        <button class="filter-tab" type="button" data-filter="favorites">★ Favoritos</button>
+      </div>
+      <div class="feed-message" id="feed-message" role="status" aria-live="polite"></div>
+      <div class="match-feed" id="match-feed" aria-live="polite" aria-busy="true"></div>
+      <div class="feed-footer"><span>Resultados y horarios sujetos a actualización oficial.</span><span>Actualización automática cada minuto</span></div>
+    </section>
+
+    <aside class="right-rail" aria-label="Información de la jornada">
+      <section class="rail-panel player-panel" id="jugadores"><div class="panel-heading"><div><p class="eyebrow">FIGURAS DE LA TEMPORADA</p><h2>Goleadores</h2></div><span class="panel-icon" aria-hidden="true">⚽</span></div><p class="panel-caption">Máximos anotadores de las principales ligas.</p><div class="players-list" id="players-list" aria-live="polite" aria-busy="true"><div class="player-loading"><span class="loader"></span> Cargando goleadores…</div></div><p class="source-note">Estadísticas de temporada · fuente FotMob</p></section>
+      <section class="rail-panel pulse-panel"><p class="eyebrow">CENTRO DE PARTIDOS</p><h2>El mundo<br>rueda <span>hoy.</span></h2><p>Consulta horarios, resultados y estado de juego de las competiciones más seguidas.</p><a href="#marcadores">Ver marcadores <span aria-hidden="true">→</span></a><div class="pulse-decoration" aria-hidden="true">90'</div></section>
+      <p class="disclaimer">Marcadores y estadísticas de FotMob. La disponibilidad puede variar por competición.</p>
+    </aside>
+  </main>
+  <section class="standings-section" id="posiciones" aria-labelledby="standings-title">
+    <div class="standings-heading">
+      <div><p class="eyebrow">TEMPORADA ACTUAL</p><h2 id="standings-title">Tabla de posiciones</h2></div>
+      <div class="standings-tools"><label class="visually-hidden" for="standings-league">Seleccionar competición</label><select id="standings-league" aria-label="Seleccionar liga para ver posiciones"></select><button class="refresh-button" id="standings-refresh" type="button"><span aria-hidden="true">↻</span> Actualizar</button></div>
+    </div>
+    <p class="standings-status" id="standings-status" role="status" aria-live="polite">Cargando clasificación…</p>
+    <div class="standings-table-wrap">
+      <table class="standings-table">
+        <thead><tr><th scope="col">#</th><th scope="col">EQUIPO</th><th scope="col">PJ</th><th scope="col">PG</th><th scope="col">PE</th><th scope="col">PP</th><th scope="col">GF</th><th scope="col">GC</th><th scope="col">DG</th><th scope="col">PTS</th></tr></thead>
+        <tbody id="standings-body"><tr><td colspan="10">Cargando clasificación…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="standings-footnote">PJ partidos jugados · DG diferencia de goles · actualización automática cada 15 minutos.</p>
+  </section>
+  <footer class="site-footer"><span>FÚTBOL AL DÍA</span><span>Pasión por el juego, en cualquier cancha.</span><a href="#inicio">Volver arriba ↑</a></footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
